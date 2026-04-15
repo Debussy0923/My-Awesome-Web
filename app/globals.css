@@ -1,0 +1,460 @@
+﻿@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "Cascadia Code", "Consolas", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+@keyframes floatLeft {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes floatRight {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.78;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes dustDrift {
+  0% {
+    transform: translate3d(-1.5%, 1.2%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2.8%, -1.8%, 0) scale(1.03);
+  }
+  100% {
+    transform: translate3d(5.6%, -3.4%, 0) scale(1.06);
+  }
+}
+
+@keyframes dustSweep {
+  0% {
+    transform: translate3d(-4%, 2%, 0) scale(1.02);
+    opacity: 0.18;
+  }
+  50% {
+    transform: translate3d(2%, -1%, 0) scale(1.06);
+    opacity: 0.34;
+  }
+  100% {
+    transform: translate3d(8%, -4%, 0) scale(1.1);
+    opacity: 0.2;
+  }
+}
+
+@keyframes windSweep {
+  0% {
+    transform: translate3d(-6%, 3%, 0);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translate3d(2%, -1%, 0);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate3d(10%, -4%, 0);
+    opacity: 0.08;
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.82;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes iconBreath {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.24)) drop-shadow(0 0 0 rgba(177, 219, 240, 0));
+  }
+  50% {
+    transform: scale(1.03);
+    filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.26)) drop-shadow(0 0 10px rgba(177, 219, 240, 0.18));
+  }
+}
+
+@keyframes ruleDraw {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.18);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.homepage-shell .hero-scene {
+  transform: scale(1);
+  transition:
+    transform 980ms cubic-bezier(0.19, 1, 0.22, 1),
+    filter 980ms ease;
+  will-change: transform, filter;
+}
+
+.homepage-shell:has(.route-nav:hover) .hero-scene {
+  transform: scale(1.04);
+  filter: brightness(1.03) saturate(1.02);
+}
+
+.hero-ask-shell {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  width: fit-content;
+  max-width: 5.75rem;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.42rem;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(10px);
+  transition:
+    max-width 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 320ms ease,
+    background 320ms ease,
+    box-shadow 320ms ease;
+}
+
+.hero-ask-shell:hover,
+.hero-ask-shell:focus-within {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.25);
+}
+
+.hero-ask-shell-expanded {
+  max-width: 25rem;
+}
+
+.hero-ask-trigger {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  background: transparent;
+  padding: 0.46rem 0.62rem;
+}
+
+.hero-ask-badge {
+  display: flex;
+  height: 1.72rem;
+  width: 1.72rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.hero-ask-hairline {
+  width: 1.8rem;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 244, 220, 0.72), rgba(255, 255, 255, 0.1));
+  opacity: 0.9;
+  transform-origin: left;
+  transition:
+    width 260ms ease,
+    opacity 220ms ease,
+    transform 260ms ease;
+}
+
+.hero-ask-hairline-hidden {
+  width: 0;
+  opacity: 0;
+  transform: scaleX(0.1);
+}
+
+.hero-ask-entry {
+  display: flex;
+  max-width: 0;
+  align-items: center;
+  gap: 0.55rem;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition:
+    max-width 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 220ms ease,
+    transform 320ms ease,
+    margin-left 320ms ease;
+}
+
+.hero-ask-entry-open {
+  max-width: 18rem;
+  margin-left: 0.15rem;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero-ask-input {
+  width: clamp(10rem, 18vw, 13.5rem);
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.hero-ask-input::placeholder {
+  color: rgba(255, 255, 255, 0.36);
+}
+
+.hero-ask-send {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(244, 217, 167, 0.16);
+  padding: 0.52rem 0.86rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #fff1cf;
+  transition:
+    border-color 280ms ease,
+    background 280ms ease,
+    transform 280ms ease;
+}
+
+.hero-ask-send:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(244, 217, 167, 0.24);
+  transform: translateY(-1px);
+}
+
+.route-nav-float-left {
+  animation: floatLeft 6.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+.route-nav-float-right {
+  animation: floatRight 7.1s ease-in-out infinite;
+  will-change: transform;
+}
+
+.route-nav {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #f5f5f5;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 280ms ease,
+    filter 280ms ease;
+}
+
+.route-nav:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.04);
+}
+
+.route-nav-panel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 16px 28px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+  opacity: 0.92;
+  transition:
+    border-color 280ms ease,
+    background 280ms ease,
+    box-shadow 280ms ease;
+}
+
+.route-nav:hover .route-nav-panel {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 18px 30px rgba(0, 0, 0, 0.14);
+}
+
+.route-nav-reading-aid {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.06) 42%, rgba(0, 0, 0, 0.22) 100%);
+  opacity: 0.78;
+}
+
+.route-nav-line {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.34) 22%, rgba(255, 250, 242, 0.88) 50%, rgba(255, 255, 255, 0.34) 78%, transparent 100%);
+  transform-origin: center;
+  animation: ruleDraw 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.route-nav-title {
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.route-nav-title-compact {
+  margin-top: 0;
+}
+
+.route-nav-subtitle {
+  margin-top: 0.34rem;
+  font-size: 0.79rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 245, 0.72);
+}
+
+.turn-sign-shell {
+  animation: iconBreath 4.6s ease-in-out infinite;
+}
+
+.route-nav:hover .turn-sign-shell {
+  animation-duration: 2.8s;
+}
+
+.turn-sign-svg {
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.22));
+}
+
+.sun-haze {
+  animation: sunPulse 10s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.dust-layer,
+.dust-layer-slow,
+.dust-layer-near {
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+.dust-layer {
+  background-image:
+    radial-gradient(circle, rgba(255, 238, 206, 0.34) 0 1.2px, transparent 1.8px),
+    radial-gradient(circle, rgba(255, 228, 184, 0.24) 0 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(255, 243, 222, 0.18) 0 1.4px, transparent 2px);
+  background-size: 180px 180px, 240px 240px, 320px 320px;
+  background-position: 0 0, 72px 44px, 140px 120px;
+  opacity: 0.34;
+  filter: blur(0.15px);
+  animation: dustDrift 16s linear infinite;
+}
+
+.dust-layer-slow {
+  background-image:
+    radial-gradient(circle, rgba(255, 233, 194, 0.24) 0 1.7px, transparent 2.6px),
+    radial-gradient(circle, rgba(255, 243, 222, 0.18) 0 1.3px, transparent 2.2px),
+    radial-gradient(circle, rgba(255, 222, 171, 0.12) 0 2px, transparent 3.2px);
+  background-size: 260px 260px, 340px 340px, 480px 480px;
+  background-position: 40px 20px, 160px 140px, 240px 90px;
+  opacity: 0.24;
+  filter: blur(0.45px);
+  animation: dustDrift 24s linear infinite reverse;
+}
+
+.dust-layer-near {
+  background-image:
+    radial-gradient(circle, rgba(255, 229, 176, 0.38) 0 2.2px, transparent 3.4px),
+    radial-gradient(circle, rgba(255, 245, 227, 0.24) 0 1.8px, transparent 2.8px),
+    radial-gradient(circle, rgba(255, 211, 142, 0.14) 0 2.8px, transparent 4px);
+  background-size: 320px 320px, 420px 420px, 560px 560px;
+  background-position: 30px 80px, 180px 140px, 300px 50px;
+  filter: blur(0.8px);
+  animation: dustSweep 11s ease-in-out infinite;
+}
+
+.wind-streaks {
+  background-image:
+    linear-gradient(112deg, transparent 0 28%, rgba(255, 226, 177, 0.12) 36%, transparent 48%),
+    linear-gradient(112deg, transparent 0 44%, rgba(255, 238, 206, 0.08) 52%, transparent 60%),
+    linear-gradient(112deg, transparent 0 60%, rgba(255, 214, 140, 0.09) 68%, transparent 76%);
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  animation: windSweep 12s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.road-focus-glow {
+  animation: glowPulse 8.8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scene,
+  .route-nav-float-left,
+  .route-nav-float-right,
+  .sun-haze,
+  .dust-layer,
+  .dust-layer-slow,
+  .dust-layer-near,
+  .wind-streaks,
+  .road-focus-glow,
+  .turn-sign-shell,
+  .route-nav-line {
+    animation: none !important;
+  }
+
+  .hero-ask-shell,
+  .hero-ask-entry,
+  .hero-ask-hairline,
+  .route-nav,
+  .route-nav-panel,
+  .hero-scene {
+    transition: none !important;
+  }
+}
+
+

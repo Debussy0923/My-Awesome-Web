@@ -278,6 +278,14 @@ body {
   transform: translateY(-1px);
 }
 
+.hero-ask-send:disabled {
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.34);
+  transform: none;
+}
+
 .route-nav-float-left {
   animation: floatLeft 6.2s ease-in-out infinite;
   will-change: transform;

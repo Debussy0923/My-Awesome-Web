@@ -1,14 +1,22 @@
 ﻿"use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 
 export default function HeroAiAsk() {
   const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const requestIdRef = useRef(0);
   const [expanded, setExpanded] = useState(false);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
+  const hasQuestion = Boolean(question.trim());
+
+  const clearFeedback = () => {
+    requestIdRef.current += 1;
+    setAnswer("");
+    setLoading(false);
+  };
 
   const expandInput = () => {
     setExpanded(true);
@@ -17,6 +25,15 @@ export default function HeroAiAsk() {
   const collapseInput = () => {
     setExpanded(false);
     inputRef.current?.blur();
+  };
+
+  const handleQuestionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const nextQuestion = event.target.value;
+    setQuestion(nextQuestion);
+
+    if (!nextQuestion.trim()) {
+      clearFeedback();
+    }
   };
 
   useEffect(() => {
@@ -75,6 +92,8 @@ export default function HeroAiAsk() {
     }
 
     collapseInput();
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
     setLoading(true);
     setAnswer("");
 
@@ -92,11 +111,17 @@ export default function HeroAiAsk() {
       }
 
       const data = (await response.json()) as { answer?: string };
-      setAnswer(data.answer || "AI 暂时没有返回内容。");
+      if (requestIdRef.current === requestId) {
+        setAnswer(data.answer || "AI 暂时没有返回内容。");
+      }
     } catch {
-      setAnswer("AI 服务暂时不可用，请稍后再试。");
+      if (requestIdRef.current === requestId) {
+        setAnswer("AI 服务暂时不可用，请稍后再试。");
+      }
     } finally {
-      setLoading(false);
+      if (requestIdRef.current === requestId) {
+        setLoading(false);
+      }
     }
   }
 
@@ -124,18 +149,18 @@ export default function HeroAiAsk() {
             ref={inputRef}
             type="text"
             value={question}
-            onChange={(event) => setQuestion(event.target.value)}
+            onChange={handleQuestionChange}
             onFocus={expandInput}
             placeholder="点击这里，输入你的问题..."
             className="hero-ask-input"
           />
-          <button type="submit" className="hero-ask-send">
+          <button type="submit" className="hero-ask-send" disabled={!hasQuestion}>
             {loading ? "思考中" : "发送"}
           </button>
         </div>
       </form>
 
-      {(loading || answer) && (
+      {hasQuestion && (loading || answer) && (
         <div className="max-w-[28rem] rounded-2xl border border-white/12 bg-black/20 px-4 py-3 shadow-[0_12px_30px_rgba(0,0,0,0.18)] backdrop-blur-md">
           <p className="text-[0.82rem] leading-6 text-white/78">
             {loading ? "AI 正在整理回答..." : answer}

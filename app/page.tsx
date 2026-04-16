@@ -87,14 +87,14 @@ function RouteNav({
     <div className={className}>
       <Link
         href={href}
-        className={`route-nav route-nav-${side} group relative block w-[11.9rem] rounded-[1.3rem] px-4 py-4 sm:w-[13.2rem]`}
+        className={`route-nav route-nav-${side} group relative block h-[5.7rem] w-[11.9rem] rounded-[1.3rem] px-4 py-4 sm:h-[6rem] sm:w-[13.2rem]`}
       >
         <div className="route-nav-panel pointer-events-none absolute inset-0 rounded-[inherit]" />
         <div className="route-nav-reading-aid pointer-events-none absolute inset-x-3 bottom-2 h-14 rounded-[1rem]" />
         <div className="route-nav-line pointer-events-none absolute inset-x-4 top-3 h-px rounded-full" />
 
         <div
-          className={`relative mt-2 flex items-start gap-3 ${
+          className={`relative flex h-full items-center gap-3 ${
             isLeft ? "" : "flex-row-reverse"
           }`}
         >

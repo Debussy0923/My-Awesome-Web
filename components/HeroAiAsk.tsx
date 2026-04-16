@@ -91,9 +91,9 @@ export default function HeroAiAsk() {
       return;
     }
 
-    collapseInput();
     const requestId = requestIdRef.current + 1;
     requestIdRef.current = requestId;
+    setExpanded(true);
     setLoading(true);
     setAnswer("");
 
@@ -160,7 +160,7 @@ export default function HeroAiAsk() {
         </div>
       </form>
 
-      {hasQuestion && (loading || answer) && (
+      {expanded && hasQuestion && (loading || answer) && (
         <div className="max-w-[28rem] rounded-2xl border border-white/12 bg-black/20 px-4 py-3 shadow-[0_12px_30px_rgba(0,0,0,0.18)] backdrop-blur-md">
           <p className="text-[0.82rem] leading-6 text-white/78">
             {loading ? "AI 正在整理回答..." : answer}

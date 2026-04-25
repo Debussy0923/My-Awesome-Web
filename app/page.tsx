@@ -141,7 +141,7 @@ export default function Home() {
           <HeroAiAsk />
           <Link
             href="/coze"
-            className="rounded-full border border-white/14 bg-white/7 px-4 py-2 text-xs font-semibold text-white/82 shadow-[0_12px_34px_rgba(0,0,0,0.22)] backdrop-blur transition hover:border-white/24 hover:bg-white/10 hover:text-white"
+            className="rounded-full border border-white/[0.14] bg-white/[0.07] px-4 py-2 text-xs font-semibold text-white/[0.82] shadow-[0_12px_34px_rgba(0,0,0,0.22)] backdrop-blur transition hover:border-white/[0.24] hover:bg-white/10 hover:text-white"
           >
             Coze RAG
           </Link>

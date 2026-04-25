@@ -3,7 +3,7 @@
 import { FormEvent, useMemo, useState } from "react";
 import Link from "next/link";
 
-import { cozeRagModules, type CozeRagModule } from "@/lib/coze-rag-index";
+import { cozeRagModules, type CozeRagModule } from "@/lib/coze-rag-modules";
 
 type ModuleFilter = CozeRagModule | "all";
 
@@ -114,7 +114,7 @@ export default function CozeRagPage() {
                   }`}
                 >
                   <span className="block text-sm font-semibold">{item.label}</span>
-                  <span className={`mt-1 block text-xs leading-5 ${selected ? "text-white/72" : "text-[#746b5f]"}`}>
+                  <span className={`mt-1 block text-xs leading-5 ${selected ? "text-white/[0.72]" : "text-[#746b5f]"}`}>
                     {item.description}
                   </span>
                 </button>
